@@ -443,8 +443,8 @@ namespace zcode.AssetBundlePacker
             {
                 string name = itr.Current.Key;
                 int mask = itr.Current.Value;
-                if ((mask & new_version_native_bit) == new_version_native_bit
-                    && (mask & old_version_native_bit) == 0)
+                //这个地方会出现bug，如果后面的新增bundle不打native标记的话，然而native标记应该是随包的意思
+                if ((mask & old_version_native_bit) == 0)
                     add_files.Add(name);
                 else if ((mask & both_bit) == both_bit)
                     both_files.Add(name);
