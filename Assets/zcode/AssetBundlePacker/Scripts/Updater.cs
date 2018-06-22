@@ -526,6 +526,10 @@ namespace zcode.AssetBundlePacker
         {
             if (ErrorCode != emErrorCode.None)
                 yield break;
+                
+            FileHelper.CopyDirectoryAllChildren(Common.CACHE_PATH, Common.PATH, is_cover:true);
+            yield return new WaitForEndOfFrame(); 
+            /* 如下代码发现在android目录下无法从cach 目录copy 到 持久化目录，改成上面的了
 
             //从缓存中拷贝主配置文件覆盖旧文件
             for (int i = 0; i < Common.MAIN_CONFIG_NAME_ARRAY.Length; ++i)
@@ -534,7 +538,7 @@ namespace zcode.AssetBundlePacker
                 string dest = Common.GetFileFullName(Common.MAIN_CONFIG_NAME_ARRAY[i]);
                 UpdateCompleteValue(i, Common.MAIN_CONFIG_NAME_ARRAY.Length);
                 yield return Common.StartCopyFile(str, dest);
-            }
+            }*/
         }
         #endregion
 
